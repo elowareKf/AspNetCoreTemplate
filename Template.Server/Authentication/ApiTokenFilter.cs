@@ -2,7 +2,7 @@ using System;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 
-namespace DefaultAspNetCoreTemplate.Authentication {
+namespace Template.Server.Authentication {
     public class ApiTokenFilterMiddleware : IMiddleware {
         private readonly string _apiKey;
 

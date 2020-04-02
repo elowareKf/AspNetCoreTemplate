@@ -1,7 +1,4 @@
-using Database.Interfaces;
-using Models;
-
-namespace Database {
+namespace Template.Db {
     public class UnitOfWork : IUnitOfWork{
         private readonly string _connectionString;
         public readonly ProjectContext Context;

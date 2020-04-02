@@ -1,7 +1,6 @@
-﻿using System;
-using System.Text;
+﻿using System.Text;
 
-namespace Models {
+namespace Template.Models {
     public class User : ModelBase {
         public string UserName { get; set; }
         public string Name { get; set; }

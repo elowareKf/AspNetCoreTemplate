@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 
-namespace DefaultAspNetCoreTemplate.Controller {
+namespace Template.Server.Controller {
     
     [Route("api/[controller]")]
     public class DemoDataController : ControllerBase {

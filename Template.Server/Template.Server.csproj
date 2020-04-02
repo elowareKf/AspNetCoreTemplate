@@ -2,13 +2,7 @@
 
     <PropertyGroup>
         <TargetFramework>netcoreapp3.1</TargetFramework>
-        <AssemblyName>DefaultAspNetCoreTemplate</AssemblyName>
-        <RootNamespace>DefaultAspNetCoreTemplate</RootNamespace>
     </PropertyGroup>
-
-    <ItemGroup>
-      <ProjectReference Include="..\Database\Database.csproj" />
-    </ItemGroup>
 
     <ItemGroup>
       <PackageReference Include="AutoMapper" Version="9.0.0" />
@@ -18,6 +12,10 @@
       <PackageReference Include="NSwag.AspNetCore" Version="13.3.0" />
       <PackageReference Include="NSwag.Core" Version="13.3.0" />
       <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.5.0" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\Template.Db\Template.Db.csproj" />
     </ItemGroup>
 
 </Project>

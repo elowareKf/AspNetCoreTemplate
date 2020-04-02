@@ -1,10 +1,10 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DefaultAspNetCoreTemplate", "DefaultAspNetCoreTemplate\DefaultAspNetCoreTemplate.csproj", "{CF85B66F-484D-41B7-9906-3B159C61E3AA}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Template.Server", "Template.Server\Template.Server.csproj", "{CF85B66F-484D-41B7-9906-3B159C61E3AA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Database", "Database\Database.csproj", "{2FB00A1A-01C5-476B-ADCC-D200050F7046}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Template.Db", "Template.Db\Template.Db.csproj", "{2FB00A1A-01C5-476B-ADCC-D200050F7046}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Models", "Models\Models.csproj", "{3FDE82DB-5FC1-4FC4-B926-8CAC6549FD90}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Template.Models", "Template.Models\Template.Models.csproj", "{3FDE82DB-5FC1-4FC4-B926-8CAC6549FD90}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

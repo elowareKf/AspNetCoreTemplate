@@ -1,4 +1,4 @@
-namespace DefaultAspNetCoreTemplate.Dto {
+namespace Template.Server.Dto {
     public class MapperProfile {
         
     }

@@ -4,10 +4,10 @@ using System.Linq;
 using System.Security.Authentication;
 using System.Security.Claims;
 using System.Text;
-using Database;
 using Microsoft.IdentityModel.Tokens;
+using Template.Db;
 
-namespace DefaultAspNetCoreTemplate.Authentication {
+namespace Template.Server.Authentication {
     public class LogonService : ILogonService {
         public static string SecretString { get; set; } = null;
 

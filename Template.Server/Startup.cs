@@ -1,24 +1,21 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using AutoMapper;
 using AutoMapper.EquivalencyExpression;
-using Database;
-using DefaultAspNetCoreTemplate.Authentication;
-using DefaultAspNetCoreTemplate.Dto;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc.TagHelpers.Cache;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
+using Template.Db;
+using Template.Server.Authentication;
+using Template.Server.Dto;
 
-namespace DefaultAspNetCoreTemplate {
+namespace Template.Server {
     public class Startup {
         public Startup(IConfiguration configuration) {
             Configuration = configuration;
@@ -26,10 +23,19 @@ namespace DefaultAspNetCoreTemplate {
 
         public IConfiguration Configuration { get; }
 
-        // This method gets called by the runtime. Use this method to add services to the container.
-        // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services) {
             services.AddControllersWithViews();
+
+            // TODO Use this code block to enabled [Authorize] by default
+            /*
+            services.AddMvc(options => {
+                    options.EnableEndpointRouting = false;
+                    options.Filters.Add(new AuthorizeFilter(new AuthorizationPolicyBuilder()
+                        .RequireAuthenticatedUser().Build()));
+                })
+                .SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
+            */
+
             var keyString = Configuration.GetSection("AppSettings")["JwtSecret"] ?? "NotSetAtAll";
             LogonService.SecretString = keyString;
 
@@ -38,7 +44,7 @@ namespace DefaultAspNetCoreTemplate {
             services.AddTransient<IUnitOfWork, UnitOfWork>(
                 _ => new UnitOfWork(Configuration.GetConnectionString("DefaultConnectionString")));
 
-            services.AddScoped<ApiTokenFilterMiddleware>(_ =>
+            services.AddScoped(_ =>
                 new ApiTokenFilterMiddleware("12345"));
 
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();

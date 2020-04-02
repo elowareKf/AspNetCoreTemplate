@@ -1,7 +1,7 @@
 using System;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Models {
+namespace Template.Models {
     public abstract class ModelBase {
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public string Id { get; set; }

@@ -1,8 +1,4 @@
-using System.Reflection;
-using Database.Interfaces;
-using Models;
-
-namespace Database {
+namespace Template.Db {
     public interface IUnitOfWork {
         void SaveChanges();
 

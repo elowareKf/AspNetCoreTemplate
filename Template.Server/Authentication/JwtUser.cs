@@ -1,9 +1,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
-using Models;
+using Template.Models;
 
-namespace DefaultAspNetCoreTemplate.Authentication {
+namespace Template.Server.Authentication {
     public class JwtUser {
         public string Id { get; set; }
         public string Username { get; set; }

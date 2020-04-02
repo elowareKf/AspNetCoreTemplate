@@ -1,7 +1,7 @@
 using Microsoft.EntityFrameworkCore;
-using Models;
+using Template.Models;
 
-namespace Database {
+namespace Template.Db {
     public class ProjectContext : DbContext {
         private readonly string _connectionString;
 

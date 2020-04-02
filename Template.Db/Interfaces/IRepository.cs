@@ -1,7 +1,6 @@
 using System.Linq;
-using Microsoft.EntityFrameworkCore;
 
-namespace Database.Interfaces {
+namespace Template.Db.Interfaces {
     public interface IRepository<TModel> {
         TModel Get(string id, bool noTracking = false);
         IQueryable<TModel> Get();

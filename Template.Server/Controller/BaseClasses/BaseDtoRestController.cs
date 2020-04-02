@@ -1,10 +1,10 @@
 using System.Linq;
 using AutoMapper;
-using Database.Interfaces;
 using Microsoft.AspNetCore.Mvc;
-using Models;
+using Template.Db.Interfaces;
+using Template.Models;
 
-namespace DefaultAspNetCoreTemplate.Controller.BaseClasses {
+namespace Template.Server.Controller.BaseClasses {
     public abstract class BaseDtoRestController<TDto, TModel> : ControllerBase
         where TModel : ModelBase, new() where TDto : new() {
         protected readonly IRepository<TModel> _repository;

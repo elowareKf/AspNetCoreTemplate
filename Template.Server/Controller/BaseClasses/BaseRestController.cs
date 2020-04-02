@@ -1,8 +1,8 @@
-using Database.Interfaces;
 using Microsoft.AspNetCore.Mvc;
-using Models;
+using Template.Db.Interfaces;
+using Template.Models;
 
-namespace DefaultAspNetCoreTemplate.Controller.BaseClasses {
+namespace Template.Server.Controller.BaseClasses {
     public abstract class BaseRestController<TModel> : ControllerBase
         where TModel : ModelBase, new() {
         protected readonly IRepository<TModel> _repository;
