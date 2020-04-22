@@ -13,6 +13,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
 using Template.Db;
 using Template.Server.Authentication;
+using Template.Server.DependencyInjection;
 using Template.Server.Dto;
 
 namespace Template.Server {
@@ -37,7 +38,10 @@ namespace Template.Server {
             */
 
             var keyString = Configuration.GetSection("AppSettings")["JwtSecret"] ?? "NotSetAtAll";
-            LogonService.SecretString = keyString;
+
+            services.AddTransient(_ => new LogonServiceDependencies {
+                SecretKey = keyString
+            });
 
             services.AddAutoMapper(exp => exp.AddCollectionMappers(), typeof(MapperProfile));
 
@@ -47,6 +51,7 @@ namespace Template.Server {
             services.AddScoped(_ =>
                 new ApiTokenFilterMiddleware("12345"));
 
+            services.AddTransient<ILogonService, LogonService>();
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
             services.AddSwaggerDocument();
