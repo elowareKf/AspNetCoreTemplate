@@ -85,6 +85,7 @@ namespace Template.Server {
             app.UseCors(builder => {
                 builder.AllowAnyOrigin();
                 builder.AllowAnyMethod();
+                builder.WithExposedHeaders("Authorization");
             });
 
             if (env.IsDevelopment()) {
