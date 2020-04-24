@@ -12,10 +12,12 @@ namespace Template.Server.Authentication {
         }
 
         public Task InvokeAsync(HttpContext context, RequestDelegate next) {
+            if (context.Request.Path.StartsWithSegments("/swagger"))
+                return next.Invoke(context);
+            
             if (context.Request.Headers["ApiKey"] != _apiKey) {
                 context.Response.StatusCode = StatusCodes.Status401Unauthorized;
-
-                Console.WriteLine($"{DateTime.Now.ToString("T")} - API Key missing");
+                context.Response.WriteAsync( "API key is invalid").Wait();
                 return Task.CompletedTask;
             }
 
