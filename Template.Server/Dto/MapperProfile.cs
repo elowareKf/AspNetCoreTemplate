@@ -1,5 +1,5 @@
 namespace Template.Server.Dto {
-    public class MapperProfile {
+    public class MapperProfile : AutoMapper.Profile {
         
     }
 }

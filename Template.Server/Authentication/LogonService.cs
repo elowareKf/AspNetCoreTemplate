@@ -1,24 +1,22 @@
 using System;
 using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
-using System.Security.Authentication;
 using System.Security.Claims;
 using System.Text;
 using Microsoft.IdentityModel.Tokens;
 using Template.Db;
+using Template.Server.DependencyInjection;
 
 namespace Template.Server.Authentication {
     public class LogonService : ILogonService {
-        public static string SecretString { get; set; } = null;
-
-        private readonly IUnitOfWork _unitOfWork;
         private readonly byte[] _secretBytes;
 
-        public LogonService(IUnitOfWork unitOfWork) {
-            if (SecretString == null)
-                throw new InvalidCredentialException();
+
+        private readonly IUnitOfWork _unitOfWork;
+
+        public LogonService(IUnitOfWork unitOfWork, LogonServiceDependencies dependencies) {
             _unitOfWork = unitOfWork;
-            _secretBytes = Encoding.ASCII.GetBytes(SecretString);
+            _secretBytes = Encoding.ASCII.GetBytes(dependencies.SecretKey);
         }
 
         public JwtUser Authenticate(string username, string password, string deviceToken = null) {
@@ -27,19 +25,30 @@ namespace Template.Server.Authentication {
                 return null;
 
             var result = (JwtUser) user;
+            result.Token = CreateToken(result);
+            return result;
+        }
 
+        public JwtUser DecodeToken(string token) {
+            var jwt = new JwtSecurityToken(token);
+            if (jwt.ValidFrom > DateTime.Now || jwt.ValidTo < DateTime.Now)
+                return null;
+
+            return new JwtUser(jwt.Claims);
+        }
+
+        public string CreateToken(JwtUser user) {
             var tokenHandler = new JwtSecurityTokenHandler();
             var tokenDescriptor = new SecurityTokenDescriptor {
                 Subject = new ClaimsIdentity(
-                    result.GetClaims().ToArray()
+                    user.GetClaims().ToArray()
                 ),
-                Expires = deviceToken != null ? DateTime.Now.AddYears(1) : DateTime.Now.AddDays(7),
+                Expires = DateTime.Now.AddDays(7),
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(_secretBytes),
                     SecurityAlgorithms.HmacSha256Signature)
             };
-
-            result.Token = tokenHandler.WriteToken(tokenHandler.CreateToken(tokenDescriptor));
-            return result;
+            var securityToken = tokenHandler.CreateToken(tokenDescriptor);
+            return tokenHandler.WriteToken(securityToken);
         }
     }
 }
